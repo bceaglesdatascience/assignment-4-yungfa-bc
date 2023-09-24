@@ -1,64 +1,30 @@
-import math
- 
-purchase=int(input("Number of purchases: "))
-salestax=float(input("Sales tax: "))
-customers=[]
-costs=[]
-for i in range(purchase):
-    customer=input("Customer: ")
-    cost=float(input("Cost: "))
-    customers.append(customer)
-    costs.append(cost)
+purchases = int(input("Number of purchases: "))
+sales_tax = float(input("Sales tax: "))
 
-def add_tax(costs,salestax):
-    return([cost*(1+salestax)for cost in costs])
+x = purchases
+y = 1
 
+customer_names = []
+item_costs = []
 
-withtax = add_tax(costs, salestax)
+while y<=x:
+    customer = input("Customer: ")
+    cost = float(input("Cost: "))
+    customer_names.append(customer)
+    item_costs.append(cost)
+    y=y+1
 
-totalcost={}
+def add_tax(items_costs_list, tax):
+    return [cost * (1 + tax) for cost in items_costs_list]
 
-for i in range(purchase):
-    customer=customers[i]
-    cost=withtax[i]
-    if customer in totalcost:
-        totalcost[customer]+=cost
+item_costs_with_tax = add_tax(item_costs, sales_tax)
+
+customer_totals = {}
+
+for customer, cost in zip(customer_names, item_costs_with_tax):
+    if customer in customer_totals:
+        customer_totals[customer] += cost
     else:
-        totalcost[customer]=cost
-print(totalcost)
+        customer_totals[customer] = cost
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#customer1=input("Customer: ")
-#Costbt= int(input("Cost: "))
-#customer2=input("Customer: ")
-#Costbt2=int(input("Cost: "))
-#print("Customer:{customer1})
-#Costbt3=int(input("Cost: "))
-
-#customers.append[customer1,customer2]
-#costs.append[Costbt,Costbt2,Costbt3]
-
-#def add_tax(costs,salestax):
-    #for cost in costs:
-        #costs=costs*salestax
-    #return add_tax
+print(customer_totals)
